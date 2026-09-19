@@ -21,4 +21,50 @@ movies = [
      "rating": 7.3, "duration_min": 129, "actors": ["P. Diaz", "T. Chalamet"]},
 ]
 
-print("Hello from dz-catalog-analysis-zmienko-m26-555!")
+def average_rating(movies):
+    i = 1
+    ratingSum = 0
+    
+    for movie in movies:
+        ratingSum += movie['rating']
+        i += 1
+
+    result = round(ratingSum / i, 1)
+    
+    return result
+
+def catalog_age_stats(movies, current_year=2026):
+    newest_movie_original_year = None
+    oldest_movie_original_year = None
+    newest_movie_age = None
+    oldest_movie_age = None
+    average_year = 0
+    
+    for movie in movies:
+        if 'year' not in movie:
+            continue
+        if oldest_movie_original_year is None:
+            oldest_movie_original_year = movie['year']
+        if newest_movie_original_year is None:
+            newest_movie_original_year = movie['year']
+
+        if movie['year'] < oldest_movie_original_year:
+            oldest_movie_original_year = movie['year']
+        if movie['year'] > newest_movie_original_year:
+            newest_movie_original_year = movie['year']
+
+    new_current_years_diff = current_year - newest_movie_original_year
+    old_current_years_diff = current_year - oldest_movie_original_year
+
+    average_year = round((old_current_years_diff - new_current_years_diff) / 2, 2)
+
+    return (old_current_years_diff, new_current_years_diff, average_year)
+
+def duration_in_hours(minutes):
+    hours = minutes // 60
+    minutes = minutes % 60
+
+    return f'{hours}ч {minutes}м'
+
+
+print(duration_in_hours(85))
