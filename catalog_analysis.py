@@ -104,4 +104,12 @@ def show_first_masterpiece(movies):
 
     return masterpiece
 
-print(show_first_masterpiece(movies))
+def count_long_movies(movies, threshold=120):
+    count = 0
+    for movie in movies:
+        if movie['duration_min'] > threshold:
+            count += 1
+    
+    return count
+
+print(count_long_movies(movies))
