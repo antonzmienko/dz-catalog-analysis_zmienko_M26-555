@@ -66,5 +66,15 @@ def duration_in_hours(minutes):
 
     return f'{hours}ч {minutes}м'
 
+def rating_tier(rating):
+    if rating >= 9:
+        return 'шедевр'
+    elif 8.9 > rating >= 7:
+        return 'хорошо'
 
-print(duration_in_hours(85))
+    return 'средне' if 6.9 > rating >= 5 else 'слабо'
+
+    
+
+
+print(rating_tier(0))
