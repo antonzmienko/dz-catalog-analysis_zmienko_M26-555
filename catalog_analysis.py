@@ -82,7 +82,26 @@ def decade_label(year):
             return 'недавние'
         case year if 2015 > year:
             return 'старые'
-    
 
+def show_not_comedy_movies(movies):
+    for movie in movies:
+        if 'comedy' in movie['genres']:
+            continue;
+        
+        print(movie['title'])
 
-print(decade_label(2021))
+def show_first_masterpiece(movies):
+    masterpiece = None
+    i = 0
+
+    while masterpiece is None and i <= len(movies) - 1:
+        if movies[i]['rating'] > 9:
+            masterpiece = movies[i]
+            break;
+        i += 1
+    else:
+        return "Шедевров не найдено"
+
+    return masterpiece
+
+print(show_first_masterpiece(movies))
