@@ -128,4 +128,12 @@ def format_report_line(movie):
     genres = ', '.join(movie['genres'])
     return f'"{normalize_title(movie['title'])}" ({movie['year']}) — {movie['rating']}/10, {duration_in_hours(movie['duration_min'])}, жанры: {genres}'
 
-print(format_report_line(movies[7]))
+def titles_sorted_by_rating(movies):
+    sortedList = sorted(movies, key=lambda x: x['rating'], reverse=True)
+    return [movie['title'] for movie in sortedList]
+
+def top_n_by_rating(movies, n=3):
+    sortedList = sorted(movies, key=lambda x: x['rating'], reverse=True)
+    return [(movie['title'], movie['rating']) for movie in sortedList[:n]]
+
+print(top_n_by_rating(movies, 4))
