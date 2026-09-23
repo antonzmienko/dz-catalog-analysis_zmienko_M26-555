@@ -177,4 +177,15 @@ def genres_only_in_one(movies_a, movies_b):
     genres_b = set(movies_b.get('genres'))
     return genres_a - genres_b
 
-print(genres_only_in_one(movies[0], movies[1]))
+def iter_high_rated(movies, min_rating=8.0):
+    for movie in movies:
+        if movie.get('rating', 0) >= min_rating:
+            yield movie
+
+for movie in iter_high_rated(movies, 4):
+    print(format_report_line(movie))
+
+duration_sum = sum(m["duration_min"] for m in iter_high_rated(movies, 7))
+print(duration_sum)
+
+#print(genres_only_in_one(movies[0], movies[1]))
