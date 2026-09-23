@@ -136,4 +136,29 @@ def top_n_by_rating(movies, n=3):
     sortedList = sorted(movies, key=lambda x: x['rating'], reverse=True)
     return [(movie['title'], movie['rating']) for movie in sortedList[:n]]
 
-print(top_n_by_rating(movies, 4))
+#ToDo: возможно тут нужно пересмотреть использование dict.get() в соответствии с требованиями
+def count_by_genre(movies):
+    genre_count_dict = {}
+    for movie in movies:
+        for genre in movie.get('genres'):
+            if genre in genre_count_dict:
+                genre_count_dict[genre] += 1
+            else:
+                genre_count_dict[genre] = 1
+    return genre_count_dict
+
+def actor_filmography(movies):
+    actor_filmography_dict = {}
+    for movie in movies:
+        for actor in movie.get('actors'):
+            if actor in actor_filmography_dict:
+                actor_filmography_dict[actor] += [movie['title']]
+            else:
+                actor_filmography_dict[actor] = [movie['title']]
+    return actor_filmography_dict
+
+def dict_title_rating_grande_average(movies):
+    average_rating_float = average_rating(movies)
+    return {key['title']: key['rating'] for key in movies if key['rating'] > average_rating_float}
+
+print(dict_title_rating_grande_average(movies))
