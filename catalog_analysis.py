@@ -160,5 +160,21 @@ def actor_filmography(movies):
 def dict_title_rating_grande_average(movies):
     average_rating_float = average_rating(movies)
     return {key['title']: key['rating'] for key in movies if key['rating'] > average_rating_float}
+    
+def all_genres(movies):
+    genres_list = set()
+    for movie in movies:
+        genres_list.update(movie.get('genres'))
+            
+    return genres_list
 
-print(dict_title_rating_grande_average(movies))
+def common_actors(movie1, movie2):
+    actors = set(movie1.get('actors')) & set(movie2.get('actors'))
+    return actors
+
+def genres_only_in_one(movies_a, movies_b):
+    genres_a = set(movies_a.get('genres'))
+    genres_b = set(movies_b.get('genres'))
+    return genres_a - genres_b
+
+print(genres_only_in_one(movies[0], movies[1]))
