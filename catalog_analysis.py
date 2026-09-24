@@ -22,7 +22,7 @@ movies = [
 ]
 
 def average_rating(movies):
-    i = 1
+    i = 0
     ratingSum = 0
     
     for movie in movies:
@@ -182,10 +182,36 @@ def iter_high_rated(movies, min_rating=8.0):
         if movie.get('rating', 0) >= min_rating:
             yield movie
 
-for movie in iter_high_rated(movies, 4):
-    print(format_report_line(movie))
+def generator_report(movies, min_rating=8.0):
+    for movie in iter_high_rated(movies, min_rating):
+        print(format_report_line(movie))
 
 duration_sum = sum(m["duration_min"] for m in iter_high_rated(movies, 7))
-print(duration_sum)
+
+def build_report(movies):
+    *_, average_age = catalog_age_stats(movies)
+    movies_by_title = {movie["title"]: movie for movie in movies}
+
+    print("ОТЧеТ ПО КАТАЛОГУ")
+    print(f"Средний рейтинг: {average_rating(movies)}")
+    print(f"Средний возраст фильмов: {average_age} лет")
+    print()
+    print("Топ-3 фильма:")
+    for title, _rating in top_n_by_rating(movies):
+        movie = dict(movies_by_title[title])
+        movie["genres"] = sorted(movie["genres"])
+        print(f"  {format_report_line(movie)}")
+    print()
+    print("Фильмов по жанрам:")
+    for genre, count in sorted(
+        count_by_genre(movies).items(),
+        key=lambda item: (-item[1], item[0]),
+    ):
+        print(f"  {genre} — {count}")
+    print()
+    print(f"Все жанры каталога: {', '.join(sorted(all_genres(movies)))}")
+
+
+build_report(movies)
 
 #print(genres_only_in_one(movies[0], movies[1]))
