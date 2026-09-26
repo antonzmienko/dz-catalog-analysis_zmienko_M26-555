@@ -182,7 +182,7 @@ def generator_report(movies, min_rating=8.0):
     for movie in iter_high_rated(movies, min_rating):
         print(format_report_line(movie))
 
-duration_sum = sum(m["duration_min"] for m in iter_high_rated(movies, 7))
+duration_sum = sum(m["duration_min"] for m in movies if m["rating"] > 7)
 
 #def build_report(movies):
 #    *_, average_age = catalog_age_stats(movies)
