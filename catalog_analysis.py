@@ -2,7 +2,8 @@ import math
 
 movies = [
     {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
-     "rating": 8.6, "duration_min": 155, "actors": ["T. Chalamet", "R. Ferguson", "O. Isaac"]},
+     "rating": 8.6, "duration_min": 155,
+     "actors": ["T. Chalamet", "R. Ferguson", "O. Isaac"]},
     {"title": "Kitchen Stories", "year": 2019, "genres": {"comedy", "drama"},
      "rating": 7.1, "duration_min": 98, "actors": ["A. Novak", "M. Ferguson"]},
     {"title": "silent hours", "year": 2016, "genres": {"thriller", "drama"},
@@ -87,7 +88,7 @@ def decade_label(year):
 def show_not_comedy_movies(movies):
     for movie in movies:
         if 'comedy' in movie['genres']:
-            continue;
+            continue
         
         print(movie['title'])
 
@@ -99,7 +100,7 @@ def show_first_masterpiece(movies):
         if movies[i]['rating'] > 9:
             masterpiece = movies[i]
             print(movies[i]['title'])
-            break;
+            break
         i += 1
     else:
         print("Шедевров не найдено")
@@ -115,7 +116,7 @@ def count_long_movies(movies, threshold=120):
     return count
 
 def normalize_title(title):
-    result_string = '';
+    result_string = ''
     separated_title_list = title.split()
     for word in separated_title_list:
         capitalized_word = word[0].upper() + word[1:]
@@ -128,7 +129,12 @@ def make_slug(title):
 
 def format_report_line(movie):
     genres = ', '.join(sorted(movie['genres']))
-    return f'"{normalize_title(movie['title'])}" ({movie['year']}) — {movie['rating']}/10, {duration_in_hours(movie['duration_min'])}, жанры: {genres}'
+    title = normalize_title(movie['title'])
+    duration = duration_in_hours(movie['duration_min'])
+    return (
+        f'"{title}" ({movie["year"]}) — {movie["rating"]}/10, '
+        f'{duration}, жанры: {genres}'
+    )
 
 def titles_sorted_by_rating(movies):
     sortedList = sorted(movies, key=lambda x: x['rating'], reverse=True)
@@ -157,7 +163,11 @@ def actor_filmography(movies):
 
 def dict_title_rating_grande_average(movies):
     average_rating_float = average_rating(movies)
-    return {key['title']: key['rating'] for key in movies if key['rating'] > average_rating_float}
+    return {
+        key['title']: key['rating']
+        for key in movies
+        if key['rating'] > average_rating_float
+    }
     
 def all_genres(movies):
     genres_list = set()
