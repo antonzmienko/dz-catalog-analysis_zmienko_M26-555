@@ -184,31 +184,29 @@ def generator_report(movies, min_rating=8.0):
 
 duration_sum = sum(m["duration_min"] for m in movies if m["rating"] > 7)
 
-#def build_report(movies):
-#    *_, average_age = catalog_age_stats(movies)
-#    movies_by_title = {movie["title"]: movie for movie in movies}
+def build_report(movies):
+    *_, average_age = catalog_age_stats(movies)
+    movies_by_title = {movie["title"]: movie for movie in movies}
 
-#    print("ОТЧеТ ПО КАТАЛОГУ")
-#    print(f"Средний рейтинг: {average_rating(movies)}")
-#    print(f"Средний возраст фильмов: {average_age} лет")
-#    print()
-#    print("Топ-3 фильма:")
-#    for title, _rating in top_n_by_rating(movies):
-#        movie = dict(movies_by_title[title])
-#        movie["genres"] = sorted(movie["genres"])
-#        print(f"  {format_report_line(movie)}")
-#    print()
-#    print("Фильмов по жанрам:")
-#    for genre, count in sorted(
-#        count_by_genre(movies).items(),
-#        key=lambda item: (-item[1], item[0]),
-#    ):
-#        print(f"  {genre} — {count}")
-#    print()
-#    print(f"Все жанры каталога: {', '.join(sorted(all_genres(movies)))}")
+    print("ОТЧЁТ ПО КАТАЛОГУ")
+    print(f"Средний рейтинг: {average_rating(movies)}")
+    print(f"Средний возраст фильмов: {average_age} лет")
+    print()
+    print("Топ-3 фильма:")
+    for title, _rating in top_n_by_rating(movies):
+        movie = dict(movies_by_title[title])
+        movie["genres"] = sorted(movie["genres"])
+        print(f"  {format_report_line(movie)}")
+    print()
+    print("Фильмов по жанрам:")
+    for genre, count in sorted(
+        count_by_genre(movies).items(),
+        key=lambda item: (-item[1], item[0]),
+    ):
+        print(f"  {genre} — {count}")
+    print()
+    print(f"Все жанры каталога: {', '.join(sorted(all_genres(movies)))}")
 
 
-#build_report(movies)
-
-print(catalog_age_stats(movies))
+build_report(movies)
 
