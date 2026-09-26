@@ -138,15 +138,11 @@ def top_n_by_rating(movies, n=3):
     sortedList = sorted(movies, key=lambda x: x['rating'], reverse=True)
     return [(movie['title'], movie['rating']) for movie in sortedList[:n]]
 
-#ToDo: возможно тут нужно пересмотреть использование dict.get() в соответствии с требованиями
 def count_by_genre(movies):
     genre_count_dict = {}
     for movie in movies:
-        for genre in movie.get('genres'):
-            if genre in genre_count_dict:
-                genre_count_dict[genre] += 1
-            else:
-                genre_count_dict[genre] = 1
+        for genre in movie["genres"]:
+            genre_count_dict[genre] = genre_count_dict.get(genre, 0) + 1
     return genre_count_dict
 
 def actor_filmography(movies):
