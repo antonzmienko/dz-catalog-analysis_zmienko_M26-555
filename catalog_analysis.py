@@ -98,10 +98,11 @@ def show_first_masterpiece(movies):
     while masterpiece is None and i <= len(movies) - 1:
         if movies[i]['rating'] > 9:
             masterpiece = movies[i]
+            print(movies[i]['title'])
             break;
         i += 1
     else:
-        return "Шедевров не найдено"
+        print("Шедевров не найдено")
 
     return masterpiece
 
