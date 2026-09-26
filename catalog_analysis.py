@@ -70,18 +70,18 @@ def duration_in_hours(minutes):
 def rating_tier(rating):
     if rating >= 9:
         return 'шедевр'
-    elif 8.9 > rating >= 7:
+    elif 9 > rating >= 7:
         return 'хорошо'
 
-    return 'средне' if 6.9 > rating >= 5 else 'слабо'
+    return 'средне' if 7 > rating >= 5 else 'слабо'
 
 def decade_label(year):
     match year:
-        case year if year > 2020:
+        case _ if year > 2020:
             return 'новые'
-        case year if 2020 >= year >= 2015:
+        case _ if 2020 >= year >= 2015:
             return 'недавние'
-        case year if 2015 > year:
+        case _ if 2015 > year:
             return 'старые'
 
 def show_not_comedy_movies(movies):
