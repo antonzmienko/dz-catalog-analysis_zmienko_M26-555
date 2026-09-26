@@ -171,9 +171,7 @@ def common_actors(movie1, movie2):
     return actors
 
 def genres_only_in_one(movies_a, movies_b):
-    genres_a = set(movies_a.get('genres'))
-    genres_b = set(movies_b.get('genres'))
-    return genres_a - genres_b
+    return all_genres(movies_a) - all_genres(movies_b)
 
 def iter_high_rated(movies, min_rating=8.0):
     for movie in movies:
